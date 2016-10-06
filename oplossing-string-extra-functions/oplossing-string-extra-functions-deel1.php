@@ -1,7 +1,7 @@
 <?php
 	$fruit = "kokosnoot";
 	$fruitLengte = strlen($fruit);
-	$eersteO = strpos($fruit, "o");
+	$fruitEersteO = strpos($fruit, "o");
 ?>
 
 <!DOCTYPE html>
@@ -9,6 +9,6 @@
 	<head></head>
 	<body>
 		<p><?= $fruitLengte ?></p>
-		<p><?= $eersteO ?></p>
+		<p><?= $fruitEersteO ?></p>
 	</body>
 </html>

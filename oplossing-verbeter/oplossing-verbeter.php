@@ -10,8 +10,6 @@
 <html>
 	<head></head>
 	<body>
-
 	    <h1>Foutjes verbeteren</h1>
-
 	</body>
 </html>

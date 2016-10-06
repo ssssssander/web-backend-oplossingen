@@ -1,6 +1,6 @@
 <?php
 	$fruit = "ananas";
-	$laatsteA = strrpos($fruit, "a");
+	$fruitLaatsteA = strrpos($fruit, "a");
 	$fruitHoofdletters = strtoupper($fruit);
 ?>
 
@@ -8,7 +8,7 @@
 <html>
 	<head></head>
 	<body>
-		<p><?= $laatsteA ?></p>
+		<p><?= $fruitLaatsteA ?></p>
 		<p><?= $fruitHoofdletters ?></p>
 	</body>
 </html>

@@ -2,7 +2,7 @@
 	$voornaam = "Sander";
 	$achternaam = "Borret";
 	$volledigeNaam = $voornaam . " " . $achternaam;
-	$volledigeNaamKarakters = strlen($volledigeNaam);
+	$volledigeNaamLengte = strlen($volledigeNaam);
 ?>
 
 <!DOCTYPE html>
@@ -10,6 +10,6 @@
 	<head></head>
 	<body>
 		<p><?= $volledigeNaam ?></p>
-		<p><?= $volledigeNaamKarakters ?></p>
+		<p><?= $volledigeNaamLengte ?></p>
 	</body>
 </html>
