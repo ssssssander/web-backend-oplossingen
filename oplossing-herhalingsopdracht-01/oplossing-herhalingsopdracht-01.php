@@ -26,19 +26,30 @@
 		return $fileNames;
 	}
 
-	// function searchFiles() {
-	// 	if(isset($_GET["searchQuery"])) {
-	// 		$dirVoorbeelden = "../../cursus/public/cursus/voorbeelden";
-	// 		$dirOplossingen = "../../cursus/public/cursus/oplossingen";
+	function searchFiles($dir) {
+		if(isset($_GET["searchQuery"]) && !empty($_GET["searchQuery"])) {
+			$fileNames = showList($dir);
+			$searchResults = array();
 
-	// 		foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dirVoorbeelden)) as $fileName) {
-	// 			if(substr($fileName, -4) == ".php") {
-	// 				preg_match("/" . $_GET["searchQuery"] . "/i", $fileName);
-	// 			}
-	// 		}
-	// 	}
-	// }
-	// searchFiles();
+			foreach($fileNames as $fileName) {
+				if(preg_match("/" . $_GET["searchQuery"] . "/i", basename($fileName))) {
+						array_push($searchResults, $fileName);
+					}
+			}
+			if(count($searchResults) > 0) {
+				return $searchResults;
+			}
+			else {
+				return "Spijtig, geen zoekresultaten gevonden voor " . $_GET["searchQuery"];
+			}
+			
+		}
+	}
+
+	$searchResults = searchFiles($dir);
+	if(isset($_GET["searchQuery"])) {
+		$h1 = "Zoekresultaat voor " . $_GET["searchQuery"];
+	}
 ?>
 
 <!DOCTYPE html>
@@ -66,6 +77,20 @@
 				</li>
 			<?php endforeach ?>
 			</ul>
+		<?php elseif(isset($searchResults)): ?>
+			<?php if(is_array($searchResults)): ?>
+				<ul>
+				<?php foreach($searchResults as $searchResult): ?>
+					<li>
+						<a href="<?= "http://web-backend.local/" . substr($searchResult, strrpos($searchResult, "cursus")) ?>">
+							<?= basename($searchResult) ?>
+						</a>
+					</li>
+				<?php endforeach ?>
+			</ul>
+			<?php else: ?>
+				<?= $searchResults ?>
+			<?php endif ?>
 		<?php endif ?>
 		<?php if(isset($cursusSrc)): ?>
 			<iframe style="width:750px;height:1000px;" src="<?= $cursusSrc ?>"></iframe>
