@@ -1,0 +1,12 @@
+<main>
+	<h1>Nieuws</h1>
+	<section>
+		<?php foreach($artikels as $artikel): ?>
+		<article>
+			<h2><?= $artikel["title"] ?></h2>
+			<p><?= $artikel["text"] ?></p>
+			<p>Kernwoorden: <?= $artikel["tags"] ?></p>
+		</article>
+		<?php endforeach ?>
+	</section>
+</main>
