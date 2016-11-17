@@ -31,7 +31,7 @@
 
 	function launchAngryBird() {
 		global $pigHealth, $maximumThrows;
-		static $timesCalled = 0;
+		static $timesCalled = 1;
 		static $messages = array();
 
 		array_push($messages, calculateHit());
