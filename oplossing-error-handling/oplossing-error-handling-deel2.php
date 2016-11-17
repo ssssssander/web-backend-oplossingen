@@ -5,9 +5,8 @@
 	    include "classes/" . $className . ".php";
 	});
 
-	$createMessage = false;
 	$isValid = false;
-
+	$messageOutput = false;
 	$messageObject = new Message();
 
 	try {
@@ -17,41 +16,41 @@
 					$isValid = true;
 				}
 				else {
-					throw new Exception("VALIDATION-CODE-LENGTH", 2);
+					throw new Exception("VALIDATION-CODE-LENGTH");
 				}
 			}
 			else {
-				throw new Exception("SUBMIT-ERROR", 1);
+				throw new Exception("SUBMIT-ERROR");
 			}
 		}
 	}
 	catch(Exception $e) {
-		$messageCode = $e->getCode();
+		$messageCode = $e->getMessage();
 		$message = array();
+		$createMessage = false;
 
 		switch($messageCode) {
-			case 1: $message["type"] = "error";
-					$message["text"] = "Er werd met het formulier geknoeid";
-					$createMessage = true;
-					break;
-			case 2: $message["type"] = "error";
-					$message["text"] = "De kortingscode heeft niet de juiste lengte";
-					$createMessage = true;
-					break;
+			case "SUBMIT-ERROR": 	$message["type"] = "error";
+									$message["text"] = "Er werd met het formulier geknoeid";
+									break;
+			case "VALIDATION-CODE-LENGTH": 	$message["type"] = "error";
+									$message["text"] = "De kortingscode heeft niet de juiste lengte";
+									$createMessage = true;
+									break;
 		}
 		logToFile($message);
 
 		if($createMessage) {
-			$messageObject->createMessage($message);
+			$messageObject->setMessage($message);
 		}
 
-		$messageOutput = $messageObject->showMessage();
+		$messageOutput = $messageObject->getMessage();
 	}
 
 	function logToFile($message) {
-		$timestamp = time();
-		$errorString = "[" . date("H:i:s d/m/Y") . "] - " . $_SERVER["REMOTE_ADDR"] . " - " .
-		key($message) . ":[" . $message["type"] . "] " . $message["text"] . "\n\r";
+		$date = date("H:i:s d/m/Y");
+		$ip = $_SERVER["REMOTE_ADDR"];
+		$errorString = "[" . $date . "] - " . $ip . " - type:[" . $message["type"] . "] " . $message["text"] . "\n\r";
 
 		file_put_contents("log.txt", $errorString, FILE_APPEND);
 	}
@@ -73,7 +72,7 @@
 	</head>
 	<body>
 		<h1>Geef uw kortingscode op</h1>
-		<?php if($createMessage): ?>
+		<?php if($messageOutput): ?>
 			<p class="<?= $messageOutput["type"] ?>"><?= $messageOutput["text"] ?></p>
 		<?php endif ?>
 		<?php if($isValid): ?>

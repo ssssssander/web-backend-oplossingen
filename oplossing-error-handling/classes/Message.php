@@ -2,12 +2,12 @@
 	class Message {
 		public $message = array();
 
-		public function createMessage($message) {
+		public function setMessage($message) {
 			$_SESSION["message"]["type"] = $message["type"];
 			$_SESSION["message"]["text"] = $message["text"];
 		}
 
-		public function showMessage() {
+		public function getMessage() {
 			if(isset($_SESSION["message"])) {
 				$this->message["type"] = $_SESSION["message"]["type"];
 				$this->message["text"] = $_SESSION["message"]["text"];
