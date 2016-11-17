@@ -2,6 +2,7 @@
 	session_start();
 
 	$isValid = false;
+	$messageOutput = false;
 
 	try {
 		if(isset($_POST["submit"])) {
@@ -10,11 +11,11 @@
 					$isValid = true;
 				}
 				else {
-					throw new Exception("VALIDATION-CODE-LENGTH", 2);
+					throw new Exception("VALIDATION-CODE-LENGTH");
 				}
 			}
 			else {
-				throw new Exception("SUBMIT-ERROR", 1);
+				throw new Exception("SUBMIT-ERROR");
 			}
 		}
 	}
@@ -83,7 +84,7 @@
 	</head>
 	<body>
 		<h1>Geef uw kortingscode op</h1>
-		<?php if($createMessage): ?>
+		<?php if($messageOutput): ?>
 			<p class="<?= $messageOutput["type"] ?>"><?= $messageOutput["text"] ?></p>
 		<?php endif ?>
 		<?php if($isValid): ?>
