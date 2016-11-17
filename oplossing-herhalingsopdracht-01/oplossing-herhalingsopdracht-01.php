@@ -1,6 +1,7 @@
 <?php
 	$h1 = "";
 	$dir = "../../cursus/public/cursus/";
+
 	if(isset($_GET["link"])) {
 		switch($_GET["link"]) {
 			case "cursus" : $cursusSrc = "http://web-backend.local/cursus/web-backend-cursus.pdf";
@@ -14,6 +15,7 @@
 				break;
 		}
 	}
+
 	function showList($dir) {
 		$fileNames = array();
 		foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir)) as $fileName) {
@@ -23,10 +25,12 @@
 		}
 		return $fileNames;
 	}
+
 	function searchFiles($dir) {
 		if(isset($_GET["searchQuery"]) && !empty($_GET["searchQuery"])) {
 			$fileNames = showList($dir);
 			$searchResults = array();
+
 			foreach($fileNames as $fileName) {
 				if(preg_match("/" . $_GET["searchQuery"] . "/i", basename($fileName))) {
 						array_push($searchResults, $fileName);
@@ -41,6 +45,7 @@
 			
 		}
 	}
+	
 	$searchResults = searchFiles($dir);
 	if(isset($_GET["searchQuery"])) {
 		$h1 = "Zoekresultaat voor " . $_GET["searchQuery"];
