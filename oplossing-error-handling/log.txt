@@ -9,4 +9,6 @@
 [20:13:09 10/11/2016] - 127.0.0.1 - type:[error] De kortingscode heeft niet de juiste lengte
 [20:15:24 10/11/2016] - 127.0.0.1 - type:[error] De kortingscode heeft niet de juiste lengte
 [20:15:50 10/11/2016] - 127.0.0.1 - type:[error] Er werd met het formulier geknoeid
+[23:43:01 17/11/2016] - 127.0.0.1 - type:[error] De kortingscode heeft niet de juiste lengte
+[00:06:48 18/11/2016] - 127.0.0.1 - type:[error] De kortingscode heeft niet de juiste lengte
 

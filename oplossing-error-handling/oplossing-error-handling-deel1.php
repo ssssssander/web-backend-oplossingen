@@ -1,7 +1,6 @@
 <?php
 	session_start();
 
-	$createMessage = false;
 	$isValid = false;
 
 	try {
@@ -20,17 +19,18 @@
 		}
 	}
 	catch(Exception $e) {
-		$messageCode = $e->getCode();
+		$messageCode = $e->getMessage();
+		$message = array();
+		$createMessage = false;
 
 		switch($messageCode) {
-			case 1: $message["type"] = "error";
-					$message["text"] = "Er werd met het formulier geknoeid";
-					$createMessage = true;
-					break;
-			case 2: $message["type"] = "error";
-					$message["text"] = "De kortingscode heeft niet de juiste lengte";
-					$createMessage = true;
-					break;
+			case "SUBMIT-ERROR": 	$message["type"] = "error";
+									$message["text"] = "Er werd met het formulier geknoeid";
+									break;
+			case "VALIDATION-CODE-LENGTH": 	$message["type"] = "error";
+									$message["text"] = "De kortingscode heeft niet de juiste lengte";
+									$createMessage = true;
+									break;
 		}
 		logToFile($message);
 
@@ -59,9 +59,9 @@
 	}
 
 	function logToFile($message) {
-		$timestamp = time();
-		$errorString = "[" . date("H:i:s d/m/Y") . "] - " . $_SERVER["REMOTE_ADDR"] . " - " .
-		key($message) . ":[" . $message["type"] . "] " . $message["text"] . "\n\r";
+		$date = date("H:i:s d/m/Y");
+		$ip = $_SERVER["REMOTE_ADDR"];
+		$errorString = "[" . $date . "] - " . $ip . " - type:[" . $message["type"] . "] " . $message["text"] . "\n\r";
 
 		file_put_contents("log.txt", $errorString, FILE_APPEND);
 	}
