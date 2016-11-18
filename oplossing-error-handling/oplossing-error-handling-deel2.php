@@ -30,13 +30,13 @@
 		$createMessage = false;
 
 		switch($messageCode) {
-			case "SUBMIT-ERROR": 	$message["type"] = "error";
-									$message["text"] = "Er werd met het formulier geknoeid";
-									break;
+			case "SUBMIT-ERROR": 			$message["type"] = "error";
+											$message["text"] = "Er werd met het formulier geknoeid";
+											break;
 			case "VALIDATION-CODE-LENGTH": 	$message["type"] = "error";
-									$message["text"] = "De kortingscode heeft niet de juiste lengte";
-									$createMessage = true;
-									break;
+											$message["text"] = "De kortingscode heeft niet de juiste lengte";
+											$createMessage = true;
+											break;
 		}
 		logToFile($message);
 
