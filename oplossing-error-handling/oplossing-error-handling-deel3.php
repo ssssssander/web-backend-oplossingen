@@ -55,7 +55,8 @@
 	function logToFile($message) {
 		$date = date("H:i:s d/m/Y");
 		$ip = $_SERVER["REMOTE_ADDR"];
-		$errorString = "[" . $date . "] - " . $ip . " - type:[" . $message["type"] . "] " . $message["text"] . $message["wrongCode"] ."\n\r";
+		$errorString = "[" . $date . "] - " . $ip . " - type:[" . $message["type"] . "] " . $message["text"] . $message["wrongCode"] . 
+		"\n\r";
 
 		file_put_contents("log.txt", $errorString, FILE_APPEND);
 	}
