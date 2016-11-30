@@ -63,41 +63,41 @@
 	</head>
 	<body>
 		<?php if(isset($message)): ?>
-				<p><?= $message ?></p>
-			<?php else: ?>
-				<form action="" method="get">
-					<select name="brewerNr">
-						<?php foreach($brewers as $row): ?>
-							<?php if(isset($_GET["brewerNr"]) && $_GET["brewerNr"] === $row["brouwernr"]): ?>
-								<option value="<?= $row['brouwernr'] ?>" selected><?= $row["brnaam"] ?></option>
-							<?php else: ?>
-								<option value="<?= $row['brouwernr'] ?>"><?= $row["brnaam"] ?></option>
-							<?php endif ?>
-						<?php endforeach ?>
-					</select>
-					<input type="submit" value="Geef mij alle bieren van deze brouwerij">
-				</form>
-				<?php if(isset($_GET["brewerNr"])): ?>
-					<table>
-						<thead>
+			<p><?= $message ?></p>
+		<?php else: ?>
+			<form action="" method="get">
+				<select name="brewerNr">
+					<?php foreach($brewers as $row): ?>
+						<?php if(isset($_GET["brewerNr"]) && $_GET["brewerNr"] === $row["brouwernr"]): ?>
+							<option value="<?= $row['brouwernr'] ?>" selected><?= $row["brnaam"] ?></option>
+						<?php else: ?>
+							<option value="<?= $row['brouwernr'] ?>"><?= $row["brnaam"] ?></option>
+						<?php endif ?>
+					<?php endforeach ?>
+				</select>
+				<input type="submit" value="Geef mij alle bieren van deze brouwerij">
+			</form>
+			<?php if(isset($_GET["brewerNr"])): ?>
+				<table>
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>naam</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach ($beers as $row): ?>
+							<?php static $resultNumber = 0; ++$resultNumber ?>
 							<tr>
-								<th>#</th>
-								<th>naam</th>
+								<td><?= $resultNumber ?></td>
+								<?php foreach($row as $value): ?>
+									<td><?= $value ?></td>
+								<?php endforeach ?>
 							</tr>
-						</thead>
-						<tbody>
-							<?php foreach ($beers as $row): ?>
-								<?php static $resultNumber = 0; ++$resultNumber ?>
-								<tr>
-									<td><?= $resultNumber ?></td>
-									<?php foreach($row as $value): ?>
-										<td><?= $value ?></td>
-									<?php endforeach ?>
-								</tr>
-							<?php endforeach ?>
-						</tbody>
-					</table>
-				<?php endif ?>
+						<?php endforeach ?>
+					</tbody>
+				</table>
+			<?php endif ?>
 		<?php endif ?>
 	</body>
 </html>
