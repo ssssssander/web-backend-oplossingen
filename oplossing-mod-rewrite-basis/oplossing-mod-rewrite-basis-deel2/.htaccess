@@ -1,0 +1,2 @@
+RewriteEngine On
+RewriteRule ^(rasmus)/?$ index.php?user=$1
