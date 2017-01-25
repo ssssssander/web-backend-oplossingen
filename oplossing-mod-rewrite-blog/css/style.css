@@ -1,0 +1,9 @@
+h1 {
+	border-bottom: 1px solid #b8b8b8;
+}
+input, textarea {
+	display: block;
+}
+form {
+	margin-top: 20px;
+}
